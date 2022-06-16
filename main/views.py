@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http 	  import HttpResponse
+from django.http 	  import HttpResponse, HttpResponseRedirect
 from .models		  import ToDoList, Item
+from .forms			  import CreateNewList
 
 def index(response, id):
 
@@ -13,4 +14,19 @@ def home(response):
 
 
 def create(response):
-	return render(response, "main/create.html", {})
+	if response.method == "POST":
+		#response.POST will hold dictionary of all the values from
+		#the submitted form
+		form = CreateNewList(response.POST)
+
+		if form.is_valid():
+			name     = form.cleaned_data["name"]
+			toDoList = ToDoList(name=name)
+			toDoList.save()
+
+		return HttpResponseRedirect("/%i" % toDoList.id)
+
+	else:
+		form = CreateNewList()
+	
+	return render(response, "main/create.html", {"form": form})
