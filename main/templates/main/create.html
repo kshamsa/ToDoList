@@ -4,7 +4,8 @@
 {% block title %} Create New List {% endblock %}
 
 {% block content %}
-	Create Page
+
+	<h2>Create New To Do List</h2>
 	<form method="post" action="/create/">
 		<!-- 
 			csrf_token is to prevent the CRSF
@@ -15,7 +16,7 @@
 		-->
 		{% csrf_token %}
 		{{ form.as_p }}
-		<button type="submit" name="save" class="btn">Create New </button>
+		<button type="submit" name="save" class="btn btn-success">Create New </button>
 	</form>
 
 {% endblock %}
