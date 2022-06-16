@@ -3,7 +3,20 @@
 {% block content %}
 <h1>Home Page</h1>
 
-<div class="card">
-	<p>Welcome to my To Do List website</p>
+<div class="">
+	<p>Welcome to my To Do List website where you can keep track of all your to do lists.</p>
 </div>
+
+<form action="#">
+	{% csrf_token %}
+
+	<h2>To Do Lists</h2>
+		<ul>
+			{% for toDoList in toDoLists %}
+				<li>
+					<a href="/{{ toDoList.id }}">{{toDoList.name}}</a>
+				</li>
+			{% endfor %}
+		</ul>
+</form>
 {% endblock %}
