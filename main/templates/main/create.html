@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %} Create New List {% endblock %}
+
+{% block content %}
+	Create Page
+	<form method="post" action="/create/">
+		<!-- 
+			csrf_token is to prevent the CRSF
+			token error
+
+			as_p will give each item in the form
+			some space to make it look nicer
+		-->
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" name="save">Create New </button>
+	</form>
+
+{% endblock %}
