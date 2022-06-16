@@ -21,6 +21,19 @@ def index(response, id):
 
 			if len(txt) > 2:
 				ls.item_set.create(text=txt, complete=False)
+				
+		elif response.POST.get("delete-list"):
+			ls.delete()
+			toDoLists = ToDoList.objects.all()
+			return HttpResponseRedirect("/")
+
+		elif response.POST.get("delete-item"):
+			item_id = response.POST.get("delete-item")
+			toDoItem = Item.objects.get(id=item_id)
+			toDoItem.delete()
+
+		else:
+			print(response.POST)
 
 	return render(response, "main/list.html", {"ls":ls})
 
